@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+    --font-poppins: 'Poppins', sans-serif;
+    --font-sacramento: 'Sacramento', cursive;
+    --font-ubuntu: 'Ubuntu', sans-serif;
+
+}
+
+@layer base {
+    body {
+        font-family: var(--font-poppins);
+    }
+}
+
+:root {
+    /* main color */
+    --primary-color: #F2765E;
+    --secondary-color: #315B8C;
+    --light-color: #F5EBDD;
+    --dark-color: #413333;
+}
