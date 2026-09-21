@@ -10,16 +10,20 @@
 	let loaderOverlayFront;
 	let loaderOverlayBack;
 	let ballRef;
+	let navLink = $state([]);
 	let mainContent;
 
 	onMount(() => {
-		const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+		const tl = gsap.timeline({
+			defaults: { ease: 'power3.inOut' },
+			onComplete: () => window.dispatchEvent(new CustomEvent('preloaderFinished'))
+		});
 
 		tl.from(ballRef, {
 			x: -1000,
 			duration: 2,
-			// ease: 'bounce.out',
-			repeat: -1,
+			ease: 'expo.inOut',
+			// repeat: -1,
 			repeatDelay: 0.5
 		})
 			.to(loaderOverlayFront, {
@@ -36,6 +40,23 @@
 				},
 				'<'
 			);
+		const nav = document.querySelectorAll('.nav-link');
+		nav.forEach((link) => {
+			link.addEventListener('mouseenter', () => {
+				gsap.to(link, {
+					y: -5,
+					duration: 0.3,
+					ease: 'power2.out'
+				});
+			});
+			link.addEventListener('mouseleave', () => {
+				gsap.to(link, {
+					y: 0,
+					duration: 0.3,
+					ease: 'power2.out'
+				});
+			});
+		});
 	});
 </script>
 
@@ -60,7 +81,7 @@
 </div>
 
 <div class="flex min-h-screen flex-col bg-(--light-color) text-(--dark-color)">
-	<header class="fixed inset-x-0 mx-auto my-6">
+	<header class="fixed inset-x-0 z-10 mx-auto my-6">
 		<nav class="flex flex-row items-center justify-center gap-4">
 			<div class="items-center justify-center rounded-full shadow-sm">
 				<a href="/" aria-label="Westala">
@@ -69,22 +90,27 @@
 					></div>
 				</a>
 			</div>
-			<div class="font-ubuntu flex gap-10 rounded-xl p-4 px-20 text-sm font-base shadow-sm">
-				<a href="/" class="transition-all ease-in-out hover:scale-110"> Home </a>
-				<a href="/" class="transition-all ease-in-out hover:scale-110"> About </a>
-				<a href="/" class="transition-all ease-in-out hover:scale-110"> Work </a>
-				<a href="/" class="transition-all ease-in-out hover:scale-110"> Experience </a>
+			<div class="font-ubuntu font-base flex gap-10 rounded-xl p-4 px-20 text-sm shadow-sm">
+				<a href="/" class="nav-link"> About </a>
+				<a href="/" class="nav-link"> Work </a>
+				<a href="/" class="nav-link"> Experience </a>
 			</div>
-			<div class="font-ubuntu flex gap-5 rounded-4xl py-5 px-4  text-base font-light shadow-sm">
+			<div class="font-ubuntu flex gap-5 rounded-4xl px-4 py-5 text-base font-light shadow-sm">
 				<i class="fa-solid fa-moon"></i>
 				<i class="fa-solid fa-sun"></i>
 			</div>
 		</nav>
 	</header>
 	<main class="grow">
-		<!-- {@render children()} -->
+		{@render children()}
 	</main>
-	<footer >
-
+	<footer class="bg-(--dark-color) text-(--light-color)">
+		<div>
+			<div>
+				<a href="/">Github</a>
+				<a href="/">Instagram</a>
+			</div>
+			<div></div>
+		</div>
 	</footer>
 </div>

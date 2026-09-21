@@ -1,22 +1,28 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    --font-poppins: 'Poppins', sans-serif;
-    --font-sacramento: 'Sacramento', cursive;
-    --font-ubuntu: 'Ubuntu', sans-serif;
-
+	--font-poppins: 'Poppins', sans-serif;
+	--font-sacramento: 'Sacramento', cursive;
+	--font-ubuntu: 'Ubuntu', sans-serif;
+	--font-montserrat-alt: 'Montserrat Alternates', sans-serif;
 }
 
 @layer base {
-    body {
-        font-family: var(--font-poppins);
-    }
+	html,
+	body {
+		font-family: var(--font-poppins);
+		overflow: auto;
+		scrollbar-width: none;
+	}
+	body::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 :root {
-    /* main color */
-    --primary-color: #F2765E;
-    --secondary-color: #315B8C;
-    --light-color: #F5EBDD;
-    --dark-color: #413333;
+	/* main color */
+	--primary-color: #f2765e;
+	--secondary-color: #315b8c;
+	--light-color: #f5ebdd;
+	--dark-color: #413333;
 }
